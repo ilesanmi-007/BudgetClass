@@ -25,11 +25,16 @@ class Budget:
     def balance(self):
         print('your balance for {} is {}'.format(self.categories, self.amount))
 
-    def transfer(self, cash, y):
+    def transfer(self, cash, to_object):
         '''transfer ammount to'''
         self.cash = cash
-        self.amount = self.amount - cash
-        zz = y.deposit(cash)
+        self.amount = self.amount - cash #it deducts the balance from the object
+        #and enters it as an argument to the 'transfered to' obj
+        if self.amount > cash:
+            zz = to_object.deposit(cash)
+            print("you just transferred {}".format(cash))
+        else:
+            print("insufficient balance to transfer")
         return zz
 
 somborri_1 = Budget('food')
@@ -48,6 +53,7 @@ print('depositing 300 to obj 2...clothing')
 somborri_2.deposit(300)
 somborri_2.balance()
 
+#now using the transfer method
 somborri_1.transfer(100, somborri_2)
 print('hellooooo\n')
 somborri_2.balance()
